@@ -1,12 +1,29 @@
-<html lang = "en">
+<!DOCTYPE html>
+
+<html>
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content = "IE=edge">
-	<meta value="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Three.js Github pages</title>
-	<link rel="stylesheet" href="style.css">
+    <meta name = "viewport" constent = "width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="CSSFiles/08-AnimModel.css">
+
+    <script type = "importmap">
+        {
+            "imports" : {
+                "three": "../node_modules/three/build/three.module.js",
+                "MathFile": "../node_modules/three-addons/node_modules/three/src/math/Math.js",
+                "OrbitControlFile": "../node_modules/three/examples/jsm/controls/OrbitControls.js",
+                "GLTFFile": "../node_modules/three/examples/jsm/loaders/GLTFLoader.js",
+                "AnimationMixerFile": "../node_modules/three/src/animation/AnimationMixer.js"
+            }
+        }
+    </script>
+    <script type="module" src="JavaScripts/08-AnimModel.js" defer></script>
 </head>
+
 <body>
-	<hl>Hello </hl>
+    <div id = "webgl-container"></div>    
+    <div id = "controls"></div>
 </body>
+
+
+
 </html>
