@@ -37,9 +37,9 @@ class App{
     {
         const camera = new THREE.PerspectiveCamera
         (60, window.innerWidth / window.innerHeight,
-        1, 500);
+        1, 5000);
 
-        camera.position.set(0, 0, 300);
+        camera.position.set(0, 100, 500);
         this._camera = camera;
     }
 
@@ -49,11 +49,36 @@ class App{
 
     _setupLight()
     {
+        const ambientLight = new THREE.AmbientLight(0xffffff, .5);
+        this._scene.add(ambientLight);
+
+        this._addPointLight(500, 150, 500, 0xff0000);
+        this._addPointLight(-500, 150, 500, 0xffff00);
+        this._addPointLight(-500, 150, -500, 0x00ff00);
+        this._addPointLight(500, 150, -500, 0x0000ff);
+
+        const shadowLight = new THREE.DirectionalLight(0xffffff, 0.2);
+        shadowLight.position.set(200, 500, 200);
+        shadowLight.target.position.set(0,0,0);
+
+        const directionalLightHelper = new THREE.directionalLightHelper(shadowLight, 10);
+        this._scene.add(directionalLightHelper);
+
+        this._scene.add(shadowLight);
+        this._scene.add(shadowLight.target);
+    }
+
+    _addPointLight(x, y, z, helperColor)
+    {
         const color = 0xffffff;
-        const intensity = 5;
-        const light = new THREE.DirectionalLight(color, intensity);
-        light.position.set(0, 0, 1);
-        this._scene.add(light);
+        const intensity = 1.5;
+
+        const pointLight = new THREE.PointLight(color, intensity, 2000);
+        pointLight.position.set(x,y,z);
+
+        this._scene.add(pointLight);
+        const pointLightHelper = new THREE.PointLightHelper(pointLight, 10, helperColor);
+        this._scene.add(pointLightHelper);
     }
 
     _setupControls()
@@ -63,6 +88,12 @@ class App{
 
     _setupModel()
     {
+        const planeGeometry = new THREE.PlaneGeometry(1000, 1000);
+        const planeMaterial = new THREE.MeshPhongMaterial({color: 0x878787});
+        const plane = new THREE.Mesh(planeGeometry, planeMaterial);
+        plane.rotation.x = -Math.PI/2;
+        this._scene.add(plane);
+
         new GLTFLoader().load("./Model/AnimModel.glb", (gltf) => {
             const model = gltf.scene;
             this._scene.add(model);
