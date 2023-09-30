@@ -1,5 +1,5 @@
-import * as THREE from '../node_modules/three/build/three.module.js';
-import {_Math} from "MathFile";
+import * as THREE from 'three';
+import {_Math} from 'MathFile';
 import {OrbitControls} from "OrbitControlFile";
 import {GLTFLoader} from "GLTFFile";
 import {AnimationMixer} from "AnimationMixerFile";
